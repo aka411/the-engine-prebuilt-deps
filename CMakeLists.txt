@@ -61,21 +61,22 @@ else()
 
 endif()    
 
-add_library(shaderc_shared SHARED IMPORTED)
-
-set_target_properties(shaderc_shared PROPERTIES
-    IMPORTED_LOCATION "${SHADERC_LIB_ROOT_PATH}/${SHADERC_PLATFORM}/${SHADERC_SHARED_FILE_NAME}"
-    INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/libshaderc/include"
-)
-
-if(DEFINED SHADERC_SHARED_IMPORT_FILE)
-    set_target_properties(shaderc_shared PROPERTIES
-        IMPORTED_IMPLIB "${SHADERC_LIB_ROOT_PATH}/${SHADERC_PLATFORM}/${SHADERC_SHARED_IMPORT_FILE}"
-    )
-endif()
 
 
 
 if(NOT TARGET shaderc::shaderc_shared)
-    add_library(shaderc::shaderc_shared ALIAS shaderc_shared)
+
+    add_library(shaderc::shaderc_shared SHARED IMPORTED)
+
+    set_target_properties(shaderc::shaderc_shared PROPERTIES
+        IMPORTED_LOCATION "${SHADERC_LIB_ROOT_PATH}/${SHADERC_PLATFORM}/${SHADERC_SHARED_FILE_NAME}"
+        INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/libshaderc/include"
+    )
+
+    if(DEFINED SHADERC_SHARED_IMPORT_FILE)
+        set_target_properties(shaderc::shaderc_shared PROPERTIES
+            IMPORTED_IMPLIB "${SHADERC_LIB_ROOT_PATH}/${SHADERC_PLATFORM}/${SHADERC_SHARED_IMPORT_FILE}"
+        )
+
+    endif()
 endif()
