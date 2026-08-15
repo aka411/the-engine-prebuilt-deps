@@ -69,6 +69,7 @@ if(NOT TARGET shaderc::shaderc_shared)
     add_library(shaderc::shaderc_shared SHARED IMPORTED)
 
     set_target_properties(shaderc::shaderc_shared PROPERTIES
+        IMPORTED_GLOBAL TRUE
         IMPORTED_LOCATION "${SHADERC_LIB_ROOT_PATH}/${SHADERC_PLATFORM}/${SHADERC_SHARED_FILE_NAME}"
         INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/libshaderc/include"
     )
